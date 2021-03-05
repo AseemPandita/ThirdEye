@@ -7,4 +7,5 @@ def captureImage():
     if not os.path.exists('data'):
         os.makedirs('data')
     cv2.imwrite(os.path.join('data/' , 'image.jpg'), image)
+    
     del(camera)

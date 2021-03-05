@@ -6,6 +6,7 @@ from flask_ask import Ask, request, session, question, statement
 from io import BytesIO
 from ocrHelper import getOcrData
 from visionHelper import getVisionData
+from deleteData import deleteData
 
 
 app = Flask(__name__)
@@ -41,11 +42,12 @@ def readIntent():
 
 
 @ask.intent('DeleteData')
-def readIntent():
-    output = getOcrData(IMAGE_PATH)
-    if output == "":
-        output = "Could not recognize the text."
-    speech_text = output
+def deleteIntent():
+    output = deleteData()
+    if output:
+        speech_text = "Files have been deleted"
+    else:
+        speech_text = "Error deleting files. Please try again."
     return question(speech_text).reprompt(speech_text).simple_card(speech_text)
 
 # Other amazon intents ------------------------------
