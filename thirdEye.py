@@ -40,6 +40,14 @@ def readIntent():
     return question(speech_text).reprompt(speech_text).simple_card(speech_text)
 
 
+@ask.intent('DeleteData')
+def readIntent():
+    output = getOcrData(IMAGE_PATH)
+    if output == "":
+        output = "Could not recognize the text."
+    speech_text = output
+    return question(speech_text).reprompt(speech_text).simple_card(speech_text)
+
 # Other amazon intents ------------------------------
 
 @ask.intent('AMAZON.HelpIntent')
